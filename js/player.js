@@ -6,7 +6,8 @@ function Player(game, x, y) {
 	this.sprite = new Sprite(this.game, this, "img/player.png");
 	this.xv = 0;
 	this.yv = 0;
-	this.trail = new Trail(this.game, 0, 0, this, 12);
+	this.layer = 100;
+	this.trail = new Trail(this.game, 0, 0, this, 8);
 	this.enginesOn = false;
 }
 

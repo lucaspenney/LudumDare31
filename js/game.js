@@ -33,6 +33,17 @@ Game.prototype.render = function() {
   this.ctx.fillStyle = "#000000";
   this.ctx.fillRect(0, 0, this.canvasElement.width, this.canvasElement.height);
   this.fpsManager.render(this.ctx);
+  this.entities.sort(function(a, b) {
+    if (a === null) return 1;
+    if (b === null) return -1;
+    if (a.layer === undefined) a.layer = 0;
+    if (b.layer === undefined) b.layer = 0;
+    if (a.layer < b.layer)
+      return -1;
+    if (a.layer > b.layer)
+      return 1;
+    return 0;
+  });
   for (var i = 0; i < this.entities.length; i++) {
     this.entities[i].render();
   }

@@ -11,6 +11,7 @@ function Entity(game, x, y) {
   this.y = y;
   this.rotation = 0;
   this.sprite = null;
+  this.layer = 0;
   this.game.entities.push(this);
 }
 
