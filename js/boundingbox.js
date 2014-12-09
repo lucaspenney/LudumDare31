@@ -1,16 +1,16 @@
 function BoundingBox(game, entity) {
 	this.game = game;
-	this.x = x;
-	this.y = y;
-	this.xOffset = 0;
-	this.yOffset = 0;
+	this.entity = entity;
+	this.x = entity.x;
+	this.y = entity.y;
 	this.width = entity.sprite.width;
 	this.height = entity.sprite.height;
 }
 
-BoundingBox.prototype.update = function(x, y) {
-	this.x = x;
-	this.y = y;
+BoundingBox.prototype.update = function() {
+	this.x = this.entity.x;
+	this.y = this.entity.y;
+	this.render();
 };
 
 BoundingBox.prototype.setWidth = function(width) {
@@ -32,9 +32,11 @@ BoundingBox.prototype.wouldCollide = function(x, y, e) {
 };
 
 BoundingBox.prototype.isColliding = function(e) {
-	if (e === undefined) return false;
-	if (this.x + this.width > e.boundingBox.x && this.x < e.boundingBox.x + e.boundingBox.width) {
-		if (this.y + this.height > e.boundingBox.y && this.y < e.boundingBox.y + e.boundingBox.height) {
+	if (!e.physics) return false;
+	if (this.entity === e) return false;
+	e = e.physics.boundingBox;
+	if (this.x + this.width > e.x && this.x < e.x + e.width) {
+		if (this.y + this.height > e.y && this.y < e.y + e.height) {
 			return true;
 		}
 	}
@@ -42,14 +44,14 @@ BoundingBox.prototype.isColliding = function(e) {
 };
 
 BoundingBox.prototype.getDistBetween = function(e) {
+	e = e.physics.boundingBox;
 	var point1a = this.x + (this.width / 2);
 	var point1b = this.y + (this.height / 2);
 	var point1 = new Point(point1a, point1b);
-	var point2a = e.boundingBox.x + (e.boundingBox.width / 2);
-	var point2b = e.boundingBox.y + (e.boundingBox.height / 2);
+	var point2a = e.x + (e.width / 2);
+	var point2b = e.y + (e.height / 2);
 	var point2 = new Point(point2a, point2b);
 	return point1.getDist(point2);
-
 }
 
 BoundingBox.prototype.isPointIn = function(x, y) {
@@ -62,10 +64,10 @@ BoundingBox.prototype.isPointIn = function(x, y) {
 	return false;
 };
 
-BoundingBox.prototype.draw = function() {
+BoundingBox.prototype.render = function() {
 	//For debugging
 	if (this.game.debugMode) {
-		ctx.strokeStyle = "#00F";
-		ctx.strokeRect(this.x + Game.screen.xOffset, this.y + Game.screen.yOffset, this.width, this.height);
+		this.game.ctx.strokeStyle = "#00F";
+		this.game.ctx.strokeRect(this.x - this.game.screen.xOffset, this.y - this.game.screen.yOffset, this.width, this.height);
 	}
 };

@@ -1,15 +1,13 @@
 function Screen(game) {
 	this.xOffset = 0;
 	this.yOffset = 0;
-	this.xKick = 0;
-	this.yKick = 0;
 	this.width = 600;
 	this.height = 450;
 
 }
 
 Screen.prototype.update = function() {
-	this.addKick();
+
 };
 
 Screen.prototype.scroll = function() {

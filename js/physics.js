@@ -5,10 +5,18 @@ function Physics(game, entity) {
 	this.yv = 0;
 	this.rv = 0;
 	this.maxVelocity = 8;
-	//this.boundingBox = new BoundingBox(game, entity);
+	this.boundingBox = new BoundingBox(game, entity);
 }
 
 Physics.prototype.update = function() {
+	this.boundingBox.update();
+	for (var i = 0; i < this.game.entities.length; i++) {
+		if (this.boundingBox.wouldCollide(this.xv, this.yv, this.game.entities[i])) {
+			//Basic reflecting collisions
+			this.xv *= -1;
+			this.yv *= -1;
+		}
+	}
 	this.entity.x += this.xv;
 	this.entity.y += this.yv;
 	this.entity.rotation += this.rv;
@@ -38,3 +46,10 @@ Physics.prototype.addVelocity = function(x, y, r) {
 		this.rv = this.rv * 0.99;
 	}
 };
+
+Physics.prototype.setVelocity = function(x, y, r) {
+	this.xv = 0;
+	this.yv = 0;
+	this.rv = 0;
+	this.addVelocity(x, y, r);
+}

@@ -27,8 +27,6 @@ Sprite.prototype.draw = function(x, y) {
 		//Draw relative to screen
 		x -= this.game.screen.xOffset;
 		y -= this.game.screen.yOffset;
-		this.canvas.fillStyle = "#00F";
-		//this.canvas.fillRect(x, y, 32, 32);
 		//Perform the draw
 		this.canvas.save();
 		this.canvas.translate(x + this.rotationXOffset, y + this.rotationYOffset);

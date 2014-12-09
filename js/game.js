@@ -24,7 +24,7 @@ function Game(stage) {
       this.update();
     }
   };
-  new Player(this, 100, 100);
+  new Player(this, 75, 75);
   new Asteroid(this, 150, 150);
   this.tick();
 }
