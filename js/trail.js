@@ -22,8 +22,9 @@ Trail.prototype.render = function() {
 };
 
 Trail.prototype.update = function() {
-	this.x = this.parent.x + ((Math.cos(degToRad(this.parent.rotation - 90)) * -1) * this.centerOffset) - 16;
-	this.y = this.parent.y + ((Math.sin(degToRad(this.parent.rotation - 90)) * -1) * this.centerOffset) - 16;
+	this.x = this.parent.x + ((Math.cos(degToRad(this.parent.rotation - 90)) * -4) + this.centerOffset);
+	this.y = this.parent.y + ((Math.sin(degToRad(this.parent.rotation - 90)) * -4) + this.centerOffset);
+
 	this.positions.push({
 		x: this.x,
 		y: this.y,

@@ -6,7 +6,7 @@ function Player(game, x, y) {
 	this.sprite = new Sprite(this.game, this, "img/player.png");
 	this.physics = new Physics(this.game, this);
 	this.layer = 100;
-	this.trail = new Trail(this.game, 0, 0, this, 8);
+	this.trail = new Trail(this.game, 0, 0, this, 16);
 	this.enginesOn = false;
 	this.turnThrust = 0.35;
 	this.mainThrust = 0.4;

@@ -5,8 +5,6 @@ function Sprite(game, entity, img) {
 	this.img = new Image();
 	this.img.src = img;
 	this.scale = 1;
-	this.frameWidth = 50;
-	this.frameHeight = 50;
 	this.width = 32;
 	this.height = 32;
 	this.alpha = 1;
@@ -14,19 +12,23 @@ function Sprite(game, entity, img) {
 	var _this = this;
 	this.img.onload = function() {
 		_this.loaded = true;
-		_this.xOffset = (_this.img.width / 4) * -1;
-		_this.yOffset = (_this.img.height / 4) * -1;
-		console.log(_this.img.width / 4);
-		_this.rotationXOffset = (_this.img.width / 2) * -1;
-		_this.rotationYOffset = (_this.img.height / 2) * -1;
+		_this.xOffset = 0;
+		_this.yOffset = 0;
+		_this.frameWidth = _this.img.width;
+		_this.frameHeight = _this.img.height;
+		_this.rotationXOffset = (_this.img.width / 2);
+		_this.rotationYOffset = (_this.img.height / 2);
 	}
 }
 
 Sprite.prototype.draw = function(x, y) {
+
 	if (this.loaded) {
 		//Draw relative to screen
 		x -= this.game.screen.xOffset;
 		y -= this.game.screen.yOffset;
+		this.canvas.fillStyle = "#00F";
+		//this.canvas.fillRect(x, y, 32, 32);
 		//Perform the draw
 		this.canvas.save();
 		this.canvas.translate(x + this.rotationXOffset, y + this.rotationYOffset);

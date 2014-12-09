@@ -4,7 +4,7 @@ function Physics(game, entity) {
 	this.xv = 0;
 	this.yv = 0;
 	this.rv = 0;
-	this.maxVelocity = 10;
+	this.maxVelocity = 8;
 	//this.boundingBox = new BoundingBox(game, entity);
 }
 
