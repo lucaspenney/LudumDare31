@@ -10,6 +10,7 @@ function Game(stage) {
   this.entities = [];
   this.screen = new Screen();
   this.input = new InputManager(this);
+  this.debugMode = true;
   this.tick = function() {
     var _this = this;
     requestAnimationFrame(function() {

@@ -10,7 +10,7 @@ function Trail(game, x, y, parent, centerOffset) {
 Trail.prototype.render = function() {
 	this.game.ctx.strokeStyle = "#333333";
 	this.game.ctx.lineCap = "round";
-	this.game.ctx.lineWidth = 4;
+	this.game.ctx.lineWidth = 5;
 	for (var i = 0; i < this.positions.length; i++) {
 		this.game.ctx.beginPath();
 		this.game.ctx.moveTo(this.x - this.game.screen.xOffset, this.y - this.game.screen.yOffset);
