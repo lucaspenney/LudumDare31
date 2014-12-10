@@ -11,15 +11,27 @@ function Physics(game, entity) {
 Physics.prototype.update = function() {
 	this.boundingBox.update();
 	for (var i = 0; i < this.game.entities.length; i++) {
-		if (this.boundingBox.wouldCollide(this.xv, this.yv, this.game.entities[i])) {
+		var collisionResult;
+		if (collisionResult = this.boundingBox.wouldCollide(this.xv, this.yv, this.game.entities[i])) {
 			//Basic reflecting collisions
-			this.xv *= -1;
-			this.yv *= -1;
+			this.collide(this.game.entities[i], collisionResult);
+
 		}
 	}
 	this.entity.x += this.xv;
 	this.entity.y += this.yv;
 	this.entity.rotation += this.rv;
+};
+
+Physics.prototype.collide = function(entity, collision) {
+
+	if (Math.abs(entity.physics.xv) + Math.abs(entity.physics.yv) > Math.abs(this.xv) + Math.abs(this.yv)) {
+		this.addVelocity(entity.physics.xv / 2, entity.physics.yv / 2);
+	} else {
+		entity.physics.addVelocity(this.xv / 2, this.yv / 2);
+	}
+	this.xv *= -0.5;
+	this.yv *= -0.5;
 };
 
 Physics.prototype.addVelocity = function(x, y, r) {

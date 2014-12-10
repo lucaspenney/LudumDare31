@@ -5,12 +5,12 @@ function Game(stage) {
   this.canvasElement.setAttribute('height', this.stage.height());
   this.canvasElement.setAttribute('width', this.stage.width());
   this.ctx = this.canvasElement.getContext('2d');
-  this.fpsManager = new FPSManager();
-  this.eventManager = new EventManager();
+  this.fpsManager = new FPSManager(this);
+  this.eventManager = new EventManager(this);
   this.entities = [];
-  this.screen = new Screen();
+  this.screen = new Screen(this);
   this.input = new InputManager(this);
-  this.debugMode = true;
+  this.debugMode = false;
   this.tick = function() {
     var _this = this;
     requestAnimationFrame(function() {
@@ -24,8 +24,10 @@ function Game(stage) {
       this.update();
     }
   };
-  new Player(this, 75, 75);
-  new Asteroid(this, 150, 150);
+  new Player(this, -20, -20);
+  for (var i = 0; i < 50; i++) {
+    new Asteroid(this, Math.random() * 1000, Math.random() * 1000);
+  }
   this.tick();
 }
 

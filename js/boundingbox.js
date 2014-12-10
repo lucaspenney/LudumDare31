@@ -25,7 +25,7 @@ BoundingBox.prototype.wouldCollide = function(x, y, e) {
 	var wouldCollide = false;
 	this.x += x;
 	this.y += y;
-	if (this.isColliding(e)) wouldCollide = true;
+	wouldCollide = this.isColliding(e);
 	this.x -= x;
 	this.y -= y;
 	return wouldCollide;
@@ -37,7 +37,15 @@ BoundingBox.prototype.isColliding = function(e) {
 	e = e.physics.boundingBox;
 	if (this.x + this.width > e.x && this.x < e.x + e.width) {
 		if (this.y + this.height > e.y && this.y < e.y + e.height) {
-			return true;
+			var x, y;
+			if (this.x + this.width > e.x) x = (this.x + this.width) - e.x;
+			else if (this.x < e.x + e.width) x = this.x - (e.x + e.width);
+			if (this.y + this.height > e.y) y = (this.y + this.height) - e.y;
+			else if (this.y < e.y + e.height) y = this.y - (e.y + e.height);
+			return {
+				x: x,
+				y: y,
+			};
 		}
 	}
 	return false;
