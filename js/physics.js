@@ -24,7 +24,7 @@ Physics.prototype.update = function() {
 };
 
 Physics.prototype.collide = function(entity, collision) {
-
+	if (this.entity.owner === entity || entity.owner === this.entity) return;
 	if (Math.abs(entity.physics.xv) + Math.abs(entity.physics.yv) > Math.abs(this.xv) + Math.abs(this.yv)) {
 		this.addVelocity(entity.physics.xv / 2, entity.physics.yv / 2);
 	} else {
