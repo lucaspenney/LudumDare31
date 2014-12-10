@@ -9,9 +9,9 @@ function Player(game, x, y) {
 	this.layer = 100;
 	this.trail = new Trail(this.game, 0, 0, this, 16);
 	this.enginesOn = false;
+	this.weapon = new Weapon(this.game, this);
 	this.turnThrust = 0.35;
 	this.mainThrust = 0.4;
-	this.fireInterval = new Interval(0.2);
 }
 
 Player.prototype.update = function() {
@@ -32,7 +32,7 @@ Player.prototype.update = function() {
 		this.physics.addVelocity(0, 0, this.turnThrust);
 	}
 	if (this.game.input.keys[32]) {
-		this.fireGun();
+		this.fire();
 	}
 	this.physics.update();
 
@@ -40,9 +40,7 @@ Player.prototype.update = function() {
 	this.game.screen.setYOffset(this.y - 350);
 };
 
-Player.prototype.fireGun = function() {
-	if (this.fireInterval.hasElapsed()) {
-		new Bullet(this.game, this.x, this.y, this, this.rotation, 2);
-		this.fireInterval.reset();
-	}
+Player.prototype.fire = function() {
+	if (!this.weapon) return;
+	this.weapon.fire();
 }

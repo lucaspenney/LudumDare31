@@ -10,7 +10,7 @@ function Bullet(game, x, y, player, direction, speed) {
 	this.owner = player;
 	this.physics.weight = 10;
 
-	this.physics.setVelocity(Math.cos(degToRad(this.rotation - 90)) * this.speed, Math.cos(degToRad(this.rotation - 90)) * this.speed);
+	this.physics.setVelocity(Math.cos(degToRad(this.rotation - 90)) * this.speed, Math.sin(degToRad(this.rotation - 90)) * this.speed);
 
 	var _this = this;
 	this.physics.onCollision = function() {
