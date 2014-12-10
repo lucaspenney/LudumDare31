@@ -5,7 +5,6 @@ function Interval(time) {
 }
 
 Interval.prototype.hasElapsed = function() {
-	console.log(this.getCurrentMs() - this.lastTick);
 	if (this.getCurrentMs() - this.lastTick > this.timeInterval) {
 		return true;
 	}

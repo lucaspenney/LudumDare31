@@ -5,6 +5,7 @@ function Player(game, x, y) {
 	this.rotation = 0;
 	this.sprite = new Sprite(this.game, this, "img/player.png");
 	this.physics = new Physics(this.game, this);
+	this.physics.collidesWith = ['Asteroid'];
 	this.layer = 100;
 	this.trail = new Trail(this.game, 0, 0, this, 16);
 	this.enginesOn = false;

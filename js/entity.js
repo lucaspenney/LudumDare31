@@ -3,6 +3,7 @@
 //Function to subclass entities 
 Function.prototype.extend = function(parent) {
   this.prototype = Object.create(parent.prototype);
+  this.prototype.className = this.name
 };
 
 function Entity(game, x, y) {
@@ -23,4 +24,8 @@ Entity.prototype.render = function() {
 
 Entity.prototype.update = function() {
 
+}
+
+Entity.prototype.destroy = function() {
+  this.game.entities.splice(this.game.entities.indexOf(this), 1);
 }

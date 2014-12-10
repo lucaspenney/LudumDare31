@@ -5,6 +5,7 @@ function Asteroid(game, x, y) {
 	this.sprite = new Sprite(this.game, this, "img/asteroid.png");
 	this.physics = new Physics(game, this);
 	this.physics.setVelocity(Math.random(), Math.random(), Math.random() - 0.5);
+	this.physics.collidesWith = ['Asteroid', 'Player'];
 }
 
 Asteroid.prototype.update = function() {

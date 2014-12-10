@@ -5,7 +5,9 @@ function Physics(game, entity) {
 	this.yv = 0;
 	this.rv = 0;
 	this.maxVelocity = 8;
+	this.weight = 100;
 	this.boundingBox = new BoundingBox(game, entity);
+	this.collidesWith = [];
 }
 
 Physics.prototype.update = function() {
@@ -24,14 +26,19 @@ Physics.prototype.update = function() {
 };
 
 Physics.prototype.collide = function(entity, collision) {
-	if (this.entity.owner === entity || entity.owner === this.entity) return;
+	if (this.collidesWith.indexOf(entity.className) === -1) return;
 	if (Math.abs(entity.physics.xv) + Math.abs(entity.physics.yv) > Math.abs(this.xv) + Math.abs(this.yv)) {
-		this.addVelocity(entity.physics.xv / 2, entity.physics.yv / 2);
+		var xVel = (entity.xv / 2) * (entity.weight / 100);
+		var yVel = (entity.yv / 2) * (entity.weight / 100);
+		this.addVelocity(xVel, yVel);;
 	} else {
-		entity.physics.addVelocity(this.xv / 2, this.yv / 2);
+		var xVel = (this.xv / 2) * (this.weight / 100);
+		var yVel = (this.yv / 2) * (this.weight / 100);
+		entity.physics.addVelocity(xVel, yVel);
 	}
 	this.xv *= -0.5;
 	this.yv *= -0.5;
+	this.onCollision();
 };
 
 Physics.prototype.addVelocity = function(x, y, r) {
@@ -64,4 +71,8 @@ Physics.prototype.setVelocity = function(x, y, r) {
 	this.yv = 0;
 	this.rv = 0;
 	this.addVelocity(x, y, r);
+}
+
+Physics.prototype.onCollision = function() {
+
 }
