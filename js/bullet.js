@@ -11,6 +11,7 @@ function Bullet(game, x, y, player, direction, speed) {
 	this.physics.weight = 10;
 
 	this.physics.setVelocity(Math.cos(degToRad(this.rotation - 90)) * this.speed, Math.sin(degToRad(this.rotation - 90)) * this.speed);
+	this.physics.addVelocity(this.owner.physics.xv, this.owner.physics.yv);
 
 	var _this = this;
 	this.physics.onCollision = function() {
@@ -20,8 +21,5 @@ function Bullet(game, x, y, player, direction, speed) {
 
 Bullet.prototype.update = function() {
 	Entity.prototype.update.call(this);
-	var xVel = Math.cos(degToRad(this.rotation - 90)) * this.speed;
-	var yVel = Math.sin(degToRad(this.rotation - 90)) * this.speed;
-	this.physics.addVelocity(xVel, yVel);
 	this.physics.update();
 };

@@ -14,6 +14,8 @@ function Sprite(game, entity, img) {
 		_this.loaded = true;
 		_this.xOffset = 0;
 		_this.yOffset = 0;
+		_this.width = _this.img.width;
+		_this.height = _this.img.height;
 		_this.frameWidth = _this.img.width;
 		_this.frameHeight = _this.img.height;
 		_this.rotationXOffset = (_this.img.width / 2);
