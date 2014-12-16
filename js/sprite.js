@@ -5,8 +5,8 @@ function Sprite(game, entity, img) {
 	this.img = new Image();
 	this.img.src = img;
 	this.scale = 1;
-	this.width = 32;
-	this.height = 32;
+	this.width = 0;
+	this.height = 0;
 	this.alpha = 1;
 	this.loaded = false;
 	var _this = this;

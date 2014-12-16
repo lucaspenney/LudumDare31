@@ -3,7 +3,7 @@ function Weapon(game, owner) {
 	this.kickback = 0.2;
 	this.owner = owner;
 	this.fireInterval = new Interval(0.1);
-	this.power = 10;
+	this.power = 12;
 }
 
 Weapon.prototype.fire = function() {

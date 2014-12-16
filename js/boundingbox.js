@@ -3,15 +3,22 @@ function BoundingBox(game, entity) {
 	this.entity = entity;
 	this.x = entity.x;
 	this.y = entity.y;
-	this.width = entity.sprite.width;
-	this.height = entity.sprite.height;
+	this.xOffset = 0;
+	this.yOffset = 0;
+	this.width = entity.width || entity.sprite.width;
+	this.height = entity.height || entity.sprite.height;
 }
 
 BoundingBox.prototype.update = function() {
-	this.x = this.entity.x;
-	this.y = this.entity.y;
+	this.x = this.entity.x + this.xOffset;
+	this.y = this.entity.y + this.yOffset;
 	this.render();
 };
+
+BoundingBox.prototype.setOffset = function(x, y) {
+	this.xOffset = x;
+	this.yOffset = y;
+}
 
 BoundingBox.prototype.setWidth = function(width) {
 	this.width = width;

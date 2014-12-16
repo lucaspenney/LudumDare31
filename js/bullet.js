@@ -9,7 +9,7 @@ function Bullet(game, x, y, player, direction, speed) {
 	this.speed = speed;
 	this.owner = player;
 	this.physics.weight = 10;
-
+	this.physics.maxVelocity = 12;
 	this.physics.setVelocity(Math.cos(degToRad(this.rotation - 90)) * this.speed, Math.sin(degToRad(this.rotation - 90)) * this.speed);
 	this.physics.addVelocity(this.owner.physics.xv, this.owner.physics.yv);
 
